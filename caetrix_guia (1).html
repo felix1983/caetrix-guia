@@ -1,0 +1,889 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<title>CAETRIX · Guia do Utilizador</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg: #0c0c0e;
+  --bg2: #111114;
+  --card: #16161a;
+  --card2: #1c1c21;
+  --gold: #c9a84c;
+  --gold2: #e8c56e;
+  --gold-dim: rgba(201,168,76,.12);
+  --gold-border: rgba(201,168,76,.2);
+  --green: #00d97e;
+  --green-bg: rgba(0,217,126,.08);
+  --red: #ff4d6a;
+  --red-bg: rgba(255,77,106,.08);
+  --blue: #4d9fff;
+  --blue-bg: rgba(77,159,255,.08);
+  --text: #e8e6e0;
+  --sub: rgba(232,230,224,.45);
+  --border: rgba(255,255,255,.06);
+  --font: 'DM Sans', sans-serif;
+  --display: 'Syne', sans-serif;
+  --mono: 'DM Mono', monospace;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.65;
+  overflow-x: hidden;
+}
+
+/* HEADER */
+.header {
+  background: var(--bg2);
+  padding: 48px 24px 40px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  border-bottom: 1px solid var(--border);
+}
+.header::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 80% 60% at 50% 120%, rgba(201,168,76,.1) 0%, transparent 70%);
+  pointer-events: none;
+}
+.header-eyebrow {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .4em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 20px;
+  position: relative;
+}
+.header-title {
+  font-family: var(--display);
+  font-size: 32px; font-weight: 800; color: #fff;
+  letter-spacing: -.02em; margin-bottom: 8px;
+  position: relative;
+}
+.header-title span { color: var(--gold2); }
+.header-sub {
+  font-size: 14px; color: var(--sub); font-weight: 300;
+  position: relative; max-width: 320px; margin: 0 auto 24px;
+}
+.header-badge {
+  display: inline-flex; gap: 6px;
+  background: var(--gold-dim); border: 1px solid var(--gold-border);
+  border-radius: 20px; padding: 6px 14px;
+  font-family: var(--mono); font-size: 10px;
+  color: var(--gold); letter-spacing: .05em;
+  position: relative;
+}
+
+/* NAV */
+.nav {
+  background: var(--bg2); border-bottom: 1px solid var(--border);
+  padding: 10px 16px; display: flex; gap: 4px; overflow-x: auto;
+  -webkit-overflow-scrolling: touch; scrollbar-width: none;
+  position: sticky; top: 0; z-index: 100;
+}
+.nav::-webkit-scrollbar { display: none; }
+.nav-item {
+  flex-shrink: 0; font-size: 11px; font-weight: 500;
+  padding: 5px 12px; border-radius: 20px;
+  background: transparent; color: var(--sub);
+  text-decoration: none; white-space: nowrap;
+  border: 1px solid transparent;
+  transition: all .2s; font-family: var(--mono); letter-spacing: .02em;
+}
+.nav-item:hover { border-color: var(--gold-border); color: var(--gold); }
+
+/* SECTIONS */
+.section {
+  padding: 44px 20px; max-width: 600px; margin: 0 auto;
+  border-bottom: 1px solid var(--border);
+}
+.section:last-of-type { border-bottom: none; }
+
+.section-num {
+  font-family: var(--mono); font-size: 9px; letter-spacing: .3em;
+  color: var(--gold); text-transform: uppercase; margin-bottom: 10px;
+  display: flex; align-items: center; gap: 10px;
+}
+.section-num::after {
+  content: ''; flex: 1; height: 1px; background: var(--gold-border);
+}
+.section-title {
+  font-family: var(--display);
+  font-size: 24px; font-weight: 700; line-height: 1.2;
+  margin-bottom: 12px; letter-spacing: -.02em; color: #fff;
+}
+.section-lead {
+  font-size: 14px; color: var(--sub); line-height: 1.75; margin-bottom: 28px;
+}
+
+/* CARDS */
+.cards { display: flex; flex-direction: column; gap: 10px; }
+.card {
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 18px;
+  display: flex; gap: 14px; align-items: flex-start;
+  transition: border-color .2s;
+}
+.card:hover { border-color: var(--gold-border); }
+.card-icon {
+  font-size: 22px; flex-shrink: 0;
+  width: 44px; height: 44px;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--card2); border-radius: 10px;
+  border: 1px solid var(--border);
+}
+.card-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+.card-text { font-size: 13px; color: var(--sub); line-height: 1.6; }
+
+/* CALLOUT */
+.callout {
+  border-radius: 12px; padding: 14px 16px;
+  display: flex; gap: 12px; align-items: flex-start;
+  margin-bottom: 14px;
+}
+.callout.gold { background: var(--gold-dim); border: 1px solid var(--gold-border); }
+.callout.green { background: var(--green-bg); border: 1px solid rgba(0,217,126,.2); }
+.callout.red { background: var(--red-bg); border: 1px solid rgba(255,77,106,.2); }
+.callout.blue { background: var(--blue-bg); border: 1px solid rgba(77,159,255,.2); }
+.callout-icon { font-size: 18px; flex-shrink: 0; }
+.callout-text { font-size: 13px; line-height: 1.65; }
+.callout.gold .callout-text { color: var(--gold2); }
+.callout.green .callout-text { color: var(--green); }
+.callout.red .callout-text { color: var(--red); }
+.callout.blue .callout-text { color: var(--blue); }
+
+/* SIGNAL CARD */
+.signal-card {
+  background: #0a0a0d; border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px; margin: 20px 0;
+  font-family: var(--mono);
+}
+.signal-header {
+  font-size: 10px; letter-spacing: .15em;
+  color: var(--gold); margin-bottom: 16px;
+  padding-bottom: 12px; border-bottom: 1px solid var(--border);
+  display: flex; justify-content: space-between; align-items: center;
+}
+.sig-badge {
+  background: var(--gold-dim); border: 1px solid var(--gold-border);
+  border-radius: 6px; padding: 2px 8px;
+  font-size: 9px; color: var(--gold); letter-spacing: .1em;
+}
+.signal-row {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 6px 0; font-size: 12px; border-bottom: 1px solid rgba(255,255,255,.03);
+}
+.signal-row:last-child { border-bottom: none; }
+.sig-label { color: var(--sub); }
+.sig-val { font-weight: 500; }
+.sig-val.entry { color: var(--text); }
+.sig-val.tp { color: var(--green); }
+.sig-val.sl { color: var(--red); }
+.sig-val.gold { color: var(--gold2); }
+.atlas-line {
+  margin-top: 14px; padding: 10px 12px;
+  background: rgba(77,159,255,.06); border: 1px solid rgba(77,159,255,.15);
+  border-radius: 8px; font-size: 11px; color: rgba(77,159,255,.9);
+  font-family: var(--font); font-style: italic; line-height: 1.5;
+}
+
+/* FLOW */
+.flow { display: flex; flex-direction: column; }
+.flow-item {
+  display: flex; gap: 16px; padding: 20px 0;
+  border-bottom: 1px solid var(--border);
+  position: relative;
+}
+.flow-item:last-child { border-bottom: none; }
+.flow-badge {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px;
+  background: var(--card2); border: 1px solid var(--border);
+}
+.flow-title { font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--text); }
+.flow-desc { font-size: 13px; color: var(--sub); line-height: 1.65; }
+.flow-note {
+  margin-top: 8px; padding: 7px 11px;
+  background: var(--gold-dim); border-radius: 7px;
+  font-size: 12px; color: var(--gold); display: inline-block;
+}
+
+/* RESULT */
+.results { display: flex; flex-direction: column; gap: 10px; }
+.result { border-radius: 12px; padding: 18px; border: 1px solid; }
+.result.win { background: var(--green-bg); border-color: rgba(0,217,126,.2); }
+.result.loss { background: var(--red-bg); border-color: rgba(255,77,106,.2); }
+.result-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+.result-title { font-size: 14px; font-weight: 600; }
+.result.win .result-title { color: var(--green); }
+.result.loss .result-title { color: var(--red); }
+.result-pnl { font-family: var(--mono); font-size: 14px; font-weight: 500; }
+.result.win .result-pnl { color: var(--green); }
+.result.loss .result-pnl { color: var(--red); }
+.result-details { font-size: 13px; color: var(--sub); line-height: 1.8; }
+
+/* PAPER TRADING */
+.pt-interface {
+  background: #0a0a0d; border: 1px solid var(--border);
+  border-radius: 14px; padding: 20px; margin: 20px 0;
+}
+.pt-header {
+  font-family: var(--mono); font-size: 10px; letter-spacing: .15em;
+  color: var(--gold); margin-bottom: 16px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.pt-balance { margin-bottom: 16px; }
+.pt-balance-label { font-family: var(--mono); font-size: 9px; letter-spacing: .2em; color: var(--sub); margin-bottom: 4px; }
+.pt-balance-val { font-family: var(--display); font-size: 28px; font-weight: 700; color: #fff; }
+.pt-stats { display: flex; gap: 0; margin-bottom: 16px; }
+.pt-stat { flex: 1; text-align: center; border-right: 1px solid var(--border); }
+.pt-stat:last-child { border-right: none; }
+.pt-stat-val { font-family: var(--mono); font-size: 18px; font-weight: 500; }
+.pt-stat-label { font-size: 11px; color: var(--sub); margin-top: 2px; }
+.lever-btns { display: flex; gap: 6px; margin-top: 12px; }
+.lever-btn {
+  flex: 1; text-align: center; padding: 7px 0;
+  background: var(--card2); border: 1px solid var(--border);
+  border-radius: 8px; font-family: var(--mono); font-size: 12px;
+  color: var(--sub); cursor: pointer;
+}
+.lever-btn.active {
+  background: var(--gold-dim); border-color: var(--gold-border);
+  color: var(--gold);
+}
+
+/* TIER TABLE */
+.tier-table { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); }
+.tier-row { display: flex; border-bottom: 1px solid var(--border); }
+.tier-row:last-child { border-bottom: none; }
+.tier-row.header { background: var(--card2); }
+.tier-cell { flex: 1; padding: 12px 14px; font-size: 13px; }
+.tier-cell.feature { flex: 2; color: var(--sub); }
+.tier-row.header .tier-cell { font-family: var(--mono); font-size: 10px; letter-spacing: .1em; color: var(--gold); font-weight: 500; }
+.tier-row:not(.header) { background: var(--card); }
+.tier-row:not(.header):nth-child(even) { background: var(--card2); }
+.check { color: var(--green); }
+.cross { color: rgba(255,255,255,.15); }
+
+/* TIPS */
+.tips { display: flex; flex-direction: column; gap: 10px; }
+.tip {
+  display: flex; gap: 14px; align-items: flex-start;
+  background: var(--card); border: 1px solid var(--border);
+  border-radius: 12px; padding: 16px;
+}
+.tip-num {
+  width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  background: var(--gold-dim); border: 1px solid var(--gold-border);
+  font-family: var(--mono); font-size: 11px; color: var(--gold); font-weight: 500;
+}
+.tip-text { font-size: 13px; color: var(--sub); line-height: 1.65; }
+.tip-text strong { color: var(--text); }
+
+/* NEW BADGE */
+.new-badge {
+  display: inline-block; background: rgba(0,217,126,.12);
+  border: 1px solid rgba(0,217,126,.25); border-radius: 6px;
+  padding: 1px 7px; font-size: 9px; font-family: var(--mono);
+  color: var(--green); letter-spacing: .08em; margin-left: 6px;
+  vertical-align: middle;
+}
+
+/* PAYMENT CARD */
+.payment-card {
+  background: var(--card); border: 1px solid var(--gold-border);
+  border-radius: 14px; padding: 20px; margin: 16px 0;
+}
+.payment-plan {
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--border);
+}
+.payment-plan:last-child { border-bottom: none; }
+.plan-label { font-size: 14px; font-weight: 600; color: var(--text); }
+.plan-price { font-family: var(--mono); font-size: 16px; color: var(--gold2); }
+.plan-desc { font-size: 12px; color: var(--sub); margin-top: 2px; }
+
+/* CTA */
+.cta {
+  text-align: center; padding: 56px 24px;
+  background: var(--bg2); border-top: 1px solid var(--border);
+  position: relative; overflow: hidden;
+}
+.cta::before {
+  content: '';
+  position: absolute; inset: 0;
+  background: radial-gradient(ellipse 60% 80% at 50% 100%, rgba(201,168,76,.08) 0%, transparent 60%);
+}
+.cta-emoji { font-size: 48px; margin-bottom: 20px; position: relative; }
+.cta-title {
+  font-family: var(--display); font-size: 28px; font-weight: 800;
+  color: #fff; margin-bottom: 10px; position: relative;
+}
+.cta-sub { color: var(--sub); font-size: 14px; line-height: 1.7; margin-bottom: 28px; position: relative; }
+.cta-btn {
+  display: inline-block; background: var(--gold);
+  color: #000; font-weight: 700; font-size: 14px;
+  padding: 14px 28px; border-radius: 10px;
+  text-decoration: none; margin: 6px; letter-spacing: .01em;
+  transition: background .2s; position: relative;
+}
+.cta-btn:hover { background: var(--gold2); }
+.cta-btn-outline {
+  display: inline-block; border: 1px solid var(--gold-border);
+  color: var(--gold); font-weight: 500; font-size: 14px;
+  padding: 13px 28px; border-radius: 10px;
+  text-decoration: none; margin: 6px;
+  transition: all .2s; position: relative;
+}
+.cta-btn-outline:hover { background: var(--gold-dim); }
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 24px 20px;
+  font-size: 11px; color: var(--sub); line-height: 1.8;
+  border-top: 1px solid var(--border);
+  font-family: var(--mono); letter-spacing: .02em;
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<div class="header">
+  <div class="header-eyebrow">v15.4 · Março 2026</div>
+  <h1 class="header-title">CAETRIX <span>Capital</span></h1>
+  <p class="header-sub">O teu terminal de inteligência quantitativa. Sinais, análise e contexto de mercado — tudo no Telegram.</p>
+  <div class="header-badge">⚡ QUANTITATIVE INTELLIGENCE TERMINAL</div>
+</div>
+
+<!-- NAV -->
+<nav class="nav">
+  <a class="nav-item" href="#inicio">01 · Início</a>
+  <a class="nav-item" href="#sinais">02 · Sinais</a>
+  <a class="nav-item" href="#como-funciona">03 · Como Funciona</a>
+  <a class="nav-item" href="#alertas">04 · Alertas TP</a>
+  <a class="nav-item" href="#resultados">05 · Resultados</a>
+  <a class="nav-item" href="#paper">06 · Paper Trading</a>
+  <a class="nav-item" href="#briefings">07 · Briefings</a>
+  <a class="nav-item" href="#planos">08 · Planos</a>
+  <a class="nav-item" href="#dicas">09 · Dicas</a>
+</nav>
+
+<!-- 01 — INÍCIO -->
+<section class="section" id="inicio">
+  <div class="section-num">01 · Início</div>
+  <h2 class="section-title">O que é o CAETRIX?</h2>
+  <p class="section-lead">Uma plataforma de análise quantitativa que monitoriza os mercados 24 horas por dia, gera sinais de trading com inteligência artificial e avisa-te em tempo real pelo Telegram.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">📡</div>
+      <div class="card-body">
+        <div class="card-title">Sinais em tempo real</div>
+        <div class="card-text">BTC, ETH, SOL, XRP e mais 7 pares de cripto — com entry, TP1, TP2, Stop Loss e análise ATLAS incluída em cada sinal.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🧠</div>
+      <div class="card-body">
+        <div class="card-title">ATLAS Brain — Llama 3.3 70B</div>
+        <div class="card-text">Motor de IA que analisa o contexto de mercado, comenta cada sinal e responde às tuas perguntas sobre trading.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🛡️</div>
+      <div class="card-body">
+        <div class="card-title">Risk Engine automático</div>
+        <div class="card-text">Half-Kelly sizing, SignalGuard em modo RISK_OFF e drawdown máximo de -5% diário. O sistema protege o teu capital automaticamente.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📊</div>
+      <div class="card-body">
+        <div class="card-title">Briefings diários</div>
+        <div class="card-text">16 notificações/dia com o estado do mercado, abertura das sessões, notícias macro e análise de sentimento.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 02 — SINAIS -->
+<section class="section" id="sinais">
+  <div class="section-num">02 · Sinais</div>
+  <h2 class="section-title">Como é um sinal?</h2>
+  <p class="section-lead">Cada sinal tem tudo o que precisas para tomar uma decisão: entrada, alvos, risco e contexto ATLAS. Zero ambiguidade.</p>
+
+  <div class="signal-card">
+    <div class="signal-header">
+      <span>⚡ CAETRIX SIGNAL · DAYTRADE</span>
+      <span class="sig-badge">🎯 CRYPTO</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Activo</span>
+      <span class="sig-val gold">BTC/USDT LONG 📈</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Entry</span>
+      <span class="sig-val entry">83,240.00</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">TP1</span>
+      <span class="sig-val tp">84,890.00</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">TP2</span>
+      <span class="sig-val tp">86,100.00</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Stop Loss</span>
+      <span class="sig-val sl">82,100.00</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">R:R / Score</span>
+      <span class="sig-val gold">2.1:1 · ████░ 5/6</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Kelly Risk</span>
+      <span class="sig-val entry">3.0% do capital</span>
+    </div>
+    <div class="atlas-line">
+      🧠 ATLAS: Confluência técnica sólida — RSI em recuperação com volume crescente no suporte.
+    </div>
+  </div>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">⚡</div>
+      <div class="card-body">
+        <div class="card-title">SCALP — 15 minutos</div>
+        <div class="card-text">Operações rápidas em timeframe de 15min. Score mínimo 4/6. Máximo 3 scalps/dia por user (configurável).</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <div class="card-body">
+        <div class="card-title">DayTrade — 4 horas</div>
+        <div class="card-text">O tipo de sinal mais frequente. Entry em 4h, duração média de 8-24 horas.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🌊</div>
+      <div class="card-body">
+        <div class="card-title">Swing — Dias a semanas</div>
+        <div class="card-text">Sinais de maior convicção, maior R:R. Ideal para quem não pode monitorizar o mercado constantemente.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏛️</div>
+      <div class="card-body">
+        <div class="card-title">Macro — Semanas a meses</div>
+        <div class="card-text">Alta selectividade — poucos sinais por mês. Baseados em tendências macroeconómicas e análise institucional.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout gold" style="margin-top:20px">
+    <div class="callout-icon">⚙️</div>
+    <div class="callout-text"><strong>Activo agora:</strong> 7 pares cripto + 2 commodities. Score mínimo 5/6 (excepto SCALP que usa 4/6). Máximo 2 sinais por ciclo de análise. FOREX temporariamente desactivado.</div>
+  </div>
+</section>
+
+<!-- 03 — COMO FUNCIONA -->
+<section class="section" id="como-funciona">
+  <div class="section-num">03 · Como Funciona</div>
+  <h2 class="section-title">Do sinal ao resultado</h2>
+  <p class="section-lead">O pipeline completo — desde que o sistema detecta um setup até ao fecho com resultado.</p>
+
+  <div class="flow">
+    <div class="flow-item">
+      <div class="flow-badge">🔍</div>
+      <div class="flow-content">
+        <div class="flow-title">Análise de mercado</div>
+        <div class="flow-desc">Modelos XGBoost treinados em dados reais analisam RSI, ADX, ATR, volume e regime macro. Score de 0 a 6 — só passam os melhores setups.</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-badge">🛡️</div>
+      <div class="flow-content">
+        <div class="flow-title">Filtros de risco</div>
+        <div class="flow-desc">SignalGuard bloqueia sinais em RISK_OFF, fim de semana e horas tóxicas (09h, 18-19h, 21-22h UTC). Drawdown diário máximo: -5%.</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-badge">🧠</div>
+      <div class="flow-content">
+        <div class="flow-title">ATLAS comenta o sinal</div>
+        <div class="flow-desc">Antes de enviar, o ATLAS Brain (Llama 3.3 70B) analisa o contexto e adiciona uma frase de análise institucional ao sinal.</div>
+        <div class="flow-note">🆕 Activo desde Março 2026</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-badge">📡</div>
+      <div class="flow-content">
+        <div class="flow-title">Receves no Telegram</div>
+        <div class="flow-desc">Sinal formatado com gráfico, entry, TP1, TP2, SL, Score, Kelly Risk e comentário ATLAS. Botões de Paper Trading incluídos.</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-badge">⏱</div>
+      <div class="flow-content">
+        <div class="flow-title">Monitorização automática</div>
+        <div class="flow-desc">O sistema verifica o resultado a cada 5 minutos usando dados Binance. Quando TP1 ou SL é atingido, fecha e regista automaticamente.</div>
+      </div>
+    </div>
+    <div class="flow-item">
+      <div class="flow-badge">🏁</div>
+      <div class="flow-content">
+        <div class="flow-title">Resultado com análise</div>
+        <div class="flow-desc">Fecho com P&L exacto, duração e comentário ATLAS. WIN ou LOSS — sempre com contexto para aprenderes com cada trade.</div>
+        <div class="flow-note">📊 Historial completo disponível em /posicoes</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 04 — ALERTAS TP -->
+<section class="section" id="alertas">
+  <div class="section-num">04 · Alertas TP <span class="new-badge">NOVO</span></div>
+  <h2 class="section-title">Aviso quando estás perto do objectivo</h2>
+  <p class="section-lead">Quando um sinal aberto atinge 80% do caminho até ao TP1, recebes automaticamente um alerta para considerares proteger a posição.</p>
+
+  <div class="signal-card">
+    <div class="signal-header">
+      <span>⚡ ALERTA DE POSIÇÃO</span>
+      <span class="sig-badge">🔔 AUTO</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Activo</span>
+      <span class="sig-val gold">BTC/USDT LONG 📈</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Preço actual</span>
+      <span class="sig-val entry">84,570.00</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">TP1</span>
+      <span class="sig-val tp">84,890.00</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Distância ao TP1</span>
+      <span class="sig-val tp">0.38%</span>
+    </div>
+    <div class="signal-row">
+      <span class="sig-label">Progresso</span>
+      <span class="sig-val gold">⚠️ Posição a 84% do objectivo</span>
+    </div>
+    <div class="atlas-line">
+      🧠 ATLAS: Considera proteger parcialmente — momentum forte mas resistência próxima.
+    </div>
+  </div>
+
+  <div class="callout blue">
+    <div class="callout-icon">ℹ️</div>
+    <div class="callout-text"><strong>Nota:</strong> Alertas de TP só existem para DayTrade, Swing e Macro. Para SCALP não faz sentido — os sinais expiram em 15 minutos. Cada sinal recebe o alerta uma única vez.</div>
+  </div>
+</section>
+
+<!-- 05 — RESULTADOS -->
+<section class="section" id="resultados">
+  <div class="section-num">05 · Resultados</div>
+  <h2 class="section-title">Como aparece um resultado?</h2>
+  <p class="section-lead">Quando um sinal fecha, recebes uma mensagem com todos os detalhes. Exemplos reais do sistema:</p>
+
+  <div class="results">
+    <div class="result win">
+      <div class="result-header">
+        <div class="result-title">✅ WIN — DOT/USDT SHORT</div>
+        <div class="result-pnl">+1.55%</div>
+      </div>
+      <div class="result-details">
+        🎯 Resultado: TP1 atingido<br>
+        📐 R:R Real: +1.33R<br>
+        ⏱ Duração: 9.6 horas<br>
+        💡 <em>"Disciplina e precisão. Mais um passo na direcção certa."</em>
+      </div>
+    </div>
+    <div class="result loss">
+      <div class="result-header">
+        <div class="result-title">❌ LOSS — LINK/USDT SHORT</div>
+        <div class="result-pnl">-0.38%</div>
+      </div>
+      <div class="result-details">
+        🛑 Resultado: Stop Loss activado<br>
+        📐 Perda controlada: -1R<br>
+        ⏱ Duração: 0.7 horas<br>
+        💡 <em>"Stop activado. Preservar capital é a prioridade número um."</em>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout green" style="margin-top:16px">
+    <div class="callout-icon">📊</div>
+    <div class="callout-text"><strong>Regra de ouro:</strong> Num sistema bem gerido, cada LOSS é pequeno e cada WIN é maior. O objectivo não é ganhar sempre — é que os lucros superem as perdas ao longo do tempo.</div>
+  </div>
+</section>
+
+<!-- 06 — PAPER TRADING -->
+<section class="section" id="paper">
+  <div class="section-num">06 · Paper Trading</div>
+  <h2 class="section-title">Pratica sem arriscar dinheiro real</h2>
+  <p class="section-lead">Simula trades reais com dinheiro virtual. Fees, slippage e liquidações — tudo igual à realidade, mas sem risco.</p>
+
+  <div class="pt-interface">
+    <div class="pt-header">🎮 PAPER TRADING DASHBOARD</div>
+    <div class="pt-balance">
+      <div class="pt-balance-label">SALDO VIRTUAL</div>
+      <div class="pt-balance-val">$1,247.83</div>
+    </div>
+    <div class="pt-stats">
+      <div class="pt-stat">
+        <div class="pt-stat-val" style="color:var(--green)">+24.8%</div>
+        <div class="pt-stat-label">Retorno</div>
+      </div>
+      <div class="pt-stat">
+        <div class="pt-stat-val" style="color:var(--gold2)">68%</div>
+        <div class="pt-stat-label">Win Rate</div>
+      </div>
+      <div class="pt-stat">
+        <div class="pt-stat-val">12</div>
+        <div class="pt-stat-label">Trades</div>
+      </div>
+    </div>
+    <div style="font-family:var(--mono);font-size:9px;color:var(--sub);margin-top:10px;letter-spacing:.1em">ALAVANCAGEM:</div>
+    <div class="lever-btns">
+      <div class="lever-btn">x1</div>
+      <div class="lever-btn active">x3</div>
+      <div class="lever-btn">x5</div>
+      <div class="lever-btn">x10</div>
+    </div>
+  </div>
+
+  <div class="callout gold">
+    <div class="callout-icon">🎮</div>
+    <div class="callout-text"><strong>Para iniciantes:</strong> Usa o Paper Trading durante 2-4 semanas antes de usar capital real. Quando fores consistentemente positivo no papel, considera passar para real.</div>
+  </div>
+
+  <div class="cards" style="margin-top:16px">
+    <div class="card">
+      <div class="card-icon">🎯</div>
+      <div class="card-body">
+        <div class="card-title">Botões directos nos sinais</div>
+        <div class="card-text">Cada sinal tem botões 🎮 x1, x3, x5, x10. Um clique abre a trade paper com a alavancagem que escolheste.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔄</div>
+      <div class="card-body">
+        <div class="card-title">Fecho automático</div>
+        <div class="card-text">Quando o sinal fecha (TP ou SL), a tua trade paper fecha automaticamente com o mesmo resultado. Zero trabalho manual.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 07 — BRIEFINGS -->
+<section class="section" id="briefings">
+  <div class="section-num">07 · Briefings</div>
+  <h2 class="section-title">O mercado nas tuas mãos todos os dias</h2>
+  <p class="section-lead">16 notificações diárias (dias úteis) com estado do mercado, sessões e análises. Nunca entras cego numa sessão de trading.</p>
+
+  <div class="cards">
+    <div class="card">
+      <div class="card-icon">🌅</div>
+      <div class="card-body">
+        <div class="card-title">Morning Sentinel — 07:00</div>
+        <div class="card-text">BTC, ETH, SOL, Fear & Greed, VIX, DXY + notícias do dia. O briefing matinal antes de tudo.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🗼</div>
+      <div class="card-body">
+        <div class="card-title">Tokyo Open — 00:00</div>
+        <div class="card-text">Abertura da sessão asiática. Primeiro sinal do dia sobre o sentimento de mercado global.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🏛️</div>
+      <div class="card-body">
+        <div class="card-title">NYSE Open — 13:30</div>
+        <div class="card-text">Quando Wall Street abre, o mercado muda de velocidade. S&P500, Nasdaq e impacto no cripto.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🔮</div>
+      <div class="card-body">
+        <div class="card-title">Polymarket Pulse — 09:15</div>
+        <div class="card-text">Análise dos mercados de predição — o que os "smart money" estão a apostar em eventos macro.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">🦍</div>
+      <div class="card-body">
+        <div class="card-title">Degen Report — Sábado 11:30</div>
+        <div class="card-text">Os tokens mais interessantes do fim de semana — alta liquidez, volume crescente. Com foto incluída.</div>
+      </div>
+    </div>
+    <div class="card">
+      <div class="card-icon">📅</div>
+      <div class="card-body">
+        <div class="card-title">Calendário Económico — Domingo 19:00</div>
+        <div class="card-text">Todos os eventos importantes da semana: Fed, BCE, inflação, desemprego. Sabes o que vem antes de acontecer.</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="callout blue" style="margin-top:16px">
+    <div class="callout-icon">📸</div>
+    <div class="callout-text"><strong>Relatórios com foto:</strong> Weekly Wrap, Nightly AI Digest, Degen Report e Weekly Report são enviados com imagem. Os restantes são texto para não spammar.</div>
+  </div>
+</section>
+
+<!-- 08 — PLANOS -->
+<section class="section" id="planos">
+  <div class="section-num">08 · Planos</div>
+  <h2 class="section-title">Observer grátis. Premium completo.</h2>
+  <p class="section-lead">Começa grátis como Observer. Quando quiseres os sinais completos, activa o Premium por USDC — detecção automática, sem formulários.</p>
+
+  <div class="tier-table">
+    <div class="tier-row header">
+      <div class="tier-cell feature">Funcionalidade</div>
+      <div class="tier-cell">Observer</div>
+      <div class="tier-cell">Premium</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Briefings diários</div>
+      <div class="tier-cell check">✓</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Breaking News</div>
+      <div class="tier-cell check">✓</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Notícias & Sentimento</div>
+      <div class="tier-cell check">✓</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Sinais Scalp · Day · Swing</div>
+      <div class="tier-cell cross">—</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Sinais Macro</div>
+      <div class="tier-cell cross">—</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Alertas TP Proximity</div>
+      <div class="tier-cell cross">—</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">ATLAS Brain AI</div>
+      <div class="tier-cell cross">—</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Paper Trading</div>
+      <div class="tier-cell cross">—</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+    <div class="tier-row">
+      <div class="tier-cell feature">Degen Report</div>
+      <div class="tier-cell cross">—</div>
+      <div class="tier-cell check">✓</div>
+    </div>
+  </div>
+
+  <div class="payment-card">
+    <div class="payment-plan">
+      <div>
+        <div class="plan-label">📅 Mensal</div>
+        <div class="plan-desc">Renovação manual a cada 30 dias</div>
+      </div>
+      <div class="plan-price">$15 USDC</div>
+    </div>
+    <div class="payment-plan">
+      <div>
+        <div class="plan-label">🔥 Anual</div>
+        <div class="plan-desc">~28% de desconto vs mensal</div>
+      </div>
+      <div class="plan-price">$130 USDC</div>
+    </div>
+  </div>
+
+  <div class="callout green">
+    <div class="callout-icon">⚡</div>
+    <div class="callout-text"><strong>Activação automática:</strong> Envia exactamente o valor em USDC nativo na rede Polygon POS. O sistema detecta o pagamento e activa o teu acesso em minutos — sem precisares de contactar ninguém. Usa o botão <strong>💎 Subscrever</strong> no bot para ver o endereço.</div>
+  </div>
+</section>
+
+<!-- 09 — DICAS -->
+<section class="section" id="dicas">
+  <div class="section-num">09 · Dicas</div>
+  <h2 class="section-title">Antes de começares, lê isto</h2>
+  <p class="section-lead">Dicas práticas para tirares o máximo proveito do CAETRIX sem cometeres os erros mais comuns.</p>
+
+  <div class="tips">
+    <div class="tip">
+      <div class="tip-num">1</div>
+      <div class="tip-text"><strong>Começa pelo Paper Trading.</strong> Mínimo 2-4 semanas antes de usar dinheiro real. Aprende o sistema sem risco.</div>
+    </div>
+    <div class="tip">
+      <div class="tip-num">2</div>
+      <div class="tip-text"><strong>Nunca ignores o Stop Loss.</strong> Uma perda controlada de 1% é muito melhor que uma de 20%. O SL existe para proteger o teu capital.</div>
+    </div>
+    <div class="tip">
+      <div class="tip-num">3</div>
+      <div class="tip-text"><strong>O Kelly Risk (3%) é sério.</strong> Não arrisques mais de 3% do teu capital em cada trade. Isso protege-te de sequências negativas.</div>
+    </div>
+    <div class="tip">
+      <div class="tip-num">4</div>
+      <div class="tip-text"><strong>Usa os alertas TP a teu favor.</strong> Quando recebes um alerta de 80% do TP1, considera fechar parcialmente ou mover o SL para breakeven.</div>
+    </div>
+    <div class="tip">
+      <div class="tip-num">5</div>
+      <div class="tip-text"><strong>Fear & Greed baixo = cuidado.</strong> Em Extreme Fear (abaixo de 20), o sistema suspende automaticamente DayTrades. É o sistema a proteger-te.</div>
+    </div>
+    <div class="tip">
+      <div class="tip-num">6</div>
+      <div class="tip-text"><strong>Os briefings são tão importantes quanto os sinais.</strong> Perceber o contexto de mercado antes de entrar numa trade é fundamental.</div>
+    </div>
+    <div class="tip">
+      <div class="tip-num">7</div>
+      <div class="tip-text"><strong>Lê o comentário ATLAS.</strong> Cada sinal tem uma análise de contexto. Não é decorativo — ajuda a perceber o racional por trás do setup.</div>
+    </div>
+  </div>
+
+  <div class="callout red" style="margin-top:24px">
+    <div class="callout-icon">⚠️</div>
+    <div class="callout-text"><strong>Aviso Legal:</strong> Trading envolve risco de perda de capital. O CAETRIX é uma ferramenta educativa e informativa — não é aconselhamento financeiro. Investe apenas o que podes perder. Não somos regulados pela CMVM.</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta">
+  <div class="cta-emoji">⚡</div>
+  <h2 class="cta-title">Pronto para Começar?</h2>
+  <p class="cta-sub">Entra grátis como Observer.<br>Sem cartão. Sem configuração.<br>Começa a aprender hoje.</p>
+  <a href="https://t.me/caetrixcapital_bot" class="cta-btn">⚡ Abrir no Telegram</a>
+  <a href="https://caetrix.com" class="cta-btn-outline">🌐 caetrix.com</a>
+</div>
+
+<footer class="footer">
+  CAETRIX Capital · Est. Janeiro 2026 · Portugal<br>
+  ⚠️ Não é aconselhamento financeiro. Fins educativos e informativos apenas.<br>
+  Trading envolve risco de perda de capital. Investe apenas o que podes perder.
+</footer>
+
+</body>
+</html>
